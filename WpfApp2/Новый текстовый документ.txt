@@ -1,0 +1,41 @@
+use shop
+create table Работники(
+ID int NOT NULL,
+ФИО nchar(36) NOT NULL,
+Возраст int NOT NULL,
+Зарплата money NOT NULL,
+CONSTRAINT работники_pk PRIMARY KEY(ID))
+create table Товар(
+ID int NOT NULL,
+Наименование nchar(20) NOT NULL,
+Цена money NOT NULL,
+Рейтинг float NOT NULL,
+CONSTRAINT Товар_pk PRIMARY KEY(ID))
+create table Заказы(
+ID int NOT NULL,
+ID_работника int NOT NULL,
+ID_товара int NOT NULL,
+Выгода money NOT NULL,
+CONSTRAINT Заказы_pk PRIMARY KEY(ID),
+CONSTRAINT fk_idrab
+FOREIGN KEY (ID_работника)
+REFERENCES Работники(ID),
+CONSTRAINT fk_idtov
+FOREIGN KEY (ID_товара)
+REFERENCES Товар(ID))
+INSERT INTO Работники(ID,ФИО,Возраст,Зарплата)
+VALUES
+(1,'Кассит Армхейм',36,9999),
+(2,'Надарр Яржерит',9,1500),
+(3,'Арвьеранд Рокнстоун', 157, 300)
+INSERT INTO Товар(ID,Наименование,Цена,Рейтинг)
+VALUES
+(1,'Пиво',100,5),
+(2,'Меч',35,4),
+(3,'Книга',5000,1)
+INSERT INTO Заказы(ID,ID_работника,ID_товара,Выгода)
+VALUES
+(1,3,3,0),
+(2,1,2,35),
+(3,3,1,200),
+(4,2,2,70)
